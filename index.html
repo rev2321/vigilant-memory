@@ -33,9 +33,9 @@
 <p>Click the button below to trigger.</p>
 
 <button class="webhookButton" data-webhook="https://hook.eu2.make.com/bvakucynr12gjhcrhag4cf8pakh63141">Introduction</button>
-<button class="webhookButton" data-webhook="https://hook.eu2.make.com/r824g8kik8y6knlal4qi0vmktn8k982o">Fun Facts</button>
+<button class="webhookButton" data-webhook="https://hook.us1.make.com/vhwnzhikcwbr2th3xlt7579mxvlb29wy">Fun Facts</button>
 <button class="webhookButton" data-webhook="https://hook.eu2.make.com/s1k8xlqkelx4cs2atqt9t9yd5stpc2ry">Guess the Product</button>
-<button class="webhookButton" data-webhook="https://hook.eu2.make.com/utd66hcpuwmi8epxb2e92yccy6d1655l">Product Highlights</button>
+<button class="webhookButton" data-webhook="https://hook.us1.make.com/v4egftxljkdyeku4ek2stjw5fcxto5c6">Product Highlights</button>
 
 <script>
     var buttons = document.querySelectorAll('.webhookButton');
@@ -43,7 +43,16 @@
     buttons.forEach(function(button) {
         button.addEventListener('click', function() {
             var webhookURL = this.getAttribute('data-webhook');
-            var apiKey = 'a42efdd5-b23f-4d84-9b8f-9b82c1ca1bce';
+            var apiKey = '';
+
+            // Assigning API key based on webhook URL
+            if (webhookURL.includes('vhwnzhikcwbr2th3xlt7579mxvlb29wy')) {
+                apiKey = '4a869398-9011-44a6-8684-263f0cc678b3'; // API key for Fun Facts
+            } else if (webhookURL.includes('v4egftxljkdyeku4ek2stjw5fcxto5c6')) {
+                apiKey = '4a869398-9011-44a6-8684-263f0cc678b3'; // API key for Product Highlights
+            } else {
+                apiKey = 'a42efdd5-b23f-4d84-9b8f-9b82c1ca1bce'; // Default API key
+            }
 
             var xhr = new XMLHttpRequest();
             xhr.open('POST', webhookURL);
