@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trigger Make Webhooks</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: aquamarine;
+        padding-top: 50px;
+    }
+    
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        margin: 10px;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+
+<h1>Trigger </h1>
+<p>Click the button below to trigger.</p>
+
+<button class="webhookButton" data-webhook="https://hook.eu2.make.com/bvakucynr12gjhcrhag4cf8pakh63141">Introduction</button>
+<button class="webhookButton" data-webhook="https://hook.eu2.make.com/r824g8kik8y6knlal4qi0vmktn8k982o">Fun Facts</button>
+<button class="webhookButton" data-webhook="https://hook.eu2.make.com/s1k8xlqkelx4cs2atqt9t9yd5stpc2ry">Guess the Product</button>
+<button class="webhookButton" data-webhook="https://hook.eu2.make.com/utd66hcpuwmi8epxb2e92yccy6d1655l">Product Highlights</button>
+
+<script>
+    var buttons = document.querySelectorAll('.webhookButton');
+
+    buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var webhookURL = this.getAttribute('data-webhook');
+            var apiKey = 'a42efdd5-b23f-4d84-9b8f-9b82c1ca1bce';
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', webhookURL);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + apiKey);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    alert('Triggered successfully!');
+                } else {
+                    alert('Failed to trigger. Status code: ' + xhr.status);
+                }
+            };
+            xhr.onerror = function() {
+                alert('Failed to trigger. Network error.');
+            };
+            xhr.send(JSON.stringify({}));
+        });
+    });
+</script>
+
+</body>
+</html>
